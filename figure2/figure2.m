@@ -34,8 +34,8 @@ ca   = cos(alfa);
 Delta = 1.0;
 
 % Initial conditions 
-Vx0   =  1.0e-6;
-Vy0   =  0.0;
+Vx0   =  0.0;
+Vy0   =  1.0e-6;
 Vz0   =  0.0;
 Phi0  =  0.0;
 y0 = [ Vx0; Vy0; Vz0; Phi0 ];
@@ -64,15 +64,11 @@ Vy  = Y(:,2);
 Vz  = Y(:,3);
 Phi = Y(:,4);
 
-V_parall = Vx*sa + Vy*ca;
-V_yz     = sqrt(Vy.^2 + Vz.^2);
+V_parall = Vx*ca + Vy*sa;
 n        = exp(-Phi);
 
 % Velocity at sheath entrance (normalized to Bohm speed Cs):
 Velocity_at_SE = [ Vx(end); Vy(end); Vz(end) ];
-
-% Inclination of the flow 
-theta_flow_angle_deg = atan2( V_yz, Vx ) * 180/pi;  
 
 figure(2)
 FontSizeLabels = 22;        %  Size of label numbers
@@ -82,9 +78,9 @@ set(gcf,'defaultaxesfontsize',FontSizeAxes)
 set(gcf,'defaultaxesfontname','Arial')
 set(gcf,'defaulttextcolor','black')
 
-plot( X, Vy, 'r', 'LineWidth',2.0 )
+plot( X, Vx, 'r', 'LineWidth',2.0 )
 hold on
-plot( X, Vx, 'b', 'LineWidth',2.0 )
+plot( X, Vy, 'b', 'LineWidth',2.0 )
 plot( X, Vz, 'k', 'LineWidth',2.0 )
 plot( X, V_parall, 'g', 'LineWidth',2.0 )
 plot( X, Phi, 'Color', [0.0 0.5 0.5], 'LineWidth',2.0 )
@@ -108,8 +104,8 @@ title(['\omega_{ci} \tau_i = ', num2str(omega_tau), ...
 format_text = '%2.2f';
 text(Xmax/4, 1.5, ...
       [ '(Vx,Vy,Vz)@SE=(', ...
-      num2str(abs(Velocity_at_SE(2)), format_text), ',', ...
       num2str(abs(Velocity_at_SE(1)), format_text), ',', ...
+      num2str(abs(Velocity_at_SE(2)), format_text), ',', ...
       num2str(abs(Velocity_at_SE(3)), format_text), ')Cs' ], ...
       'FontSize',16)
 
