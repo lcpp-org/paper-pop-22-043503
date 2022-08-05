@@ -13,7 +13,7 @@ Vy  = y(2);
 Vz  = y(3);
 Phi = y(4);
 
-ydot(1,1) = ( -omega_tau*ca*Vz - Delta/Vx - Vx ) / (Vx - 1/Vx);
-ydot(2,1) = ( omega_tau*sa*Vz - Vy ) / Vx;
-ydot(3,1) = ( omega_tau*ca*Vx - omega_tau*sa*Vy - Vz ) / Vx;
-ydot(4,1) = ( ydot(1) - Delta) / Vx;
+ydot(1,1) = ( omega_tau*sa*Vz - Vx ) / Vy;
+ydot(2,1) = ( -omega_tau*ca*Vz - Delta/Vy - Vy ) / (Vy - 1/Vy);
+ydot(3,1) = ( omega_tau*ca*Vy - omega_tau*sa*Vx - Vz ) / Vy;
+ydot(4,1) = ( ydot(2) - Delta) / Vy;
